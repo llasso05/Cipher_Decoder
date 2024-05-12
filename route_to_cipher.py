@@ -12,26 +12,28 @@ ROWS = 5
 key = '-1 2 -3 4' # neg number means read up 
 
 # Convert key into a list to split out individual numbers.
-translation_matrix = [None] * COLS
+translation_matrix = [None] * COLS # None represents the absnse of a value
 plaintext = ''
 start = 0
 stop = ROWS
 
-# turn key into a list of integers
+# turn key into a list of integers split by spaces
 key_int = [int(i) for i in key.split()] 
 
-# turn columsn into items in list of lists: 
+# turn columns into items in list of lists: 
 for k in key_int:
     if k < 0: 
-        col_items = cipherlist[start:stop]
+        # split list based of index
+        col_items = cipherlist[start:stop] 
     elif k > 0: 
+
         col_items = list((reversed(cipherlist[start:stop])))
     translation_matrix[abs(k) - 1] = col_items
     start += ROWS
     stop += ROWS
 
 print("\nciphertext = {}".format(ciphertext))
-print("\ntranslation matrix =", *translation_matrix, sep="\n")
+print("\ntranslation matrix =", * translation_matrix, sep="\n")
 print("\nkey length = {}".format(len(key_int)))
  # loop through nested lists popping off last item to new list:
 for i in range(ROWS):
