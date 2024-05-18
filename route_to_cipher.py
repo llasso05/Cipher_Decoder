@@ -23,22 +23,29 @@ key_int = [int(i) for i in key.split()]
 # turn columns into items in list of lists: 
 for k in key_int:
     if k < 0: 
-        # split list based of index
+        # split list based of index if value is greater than 0
         col_items = cipherlist[start:stop] 
     elif k > 0: 
-
+        # split list and reversed it based of index id smaller than 0
         col_items = list((reversed(cipherlist[start:stop])))
+    
+    # defining index based of absolute value -1
     translation_matrix[abs(k) - 1] = col_items
     start += ROWS
     stop += ROWS
 
+
 print("\nciphertext = {}".format(ciphertext))
 print("\ntranslation matrix =", * translation_matrix, sep="\n")
 print("\nkey length = {}".format(len(key_int)))
+
+
  # loop through nested lists popping off last item to new list:
 for i in range(ROWS):
     for col_items in translation_matrix:
+        # removing last element on list
         word = str(col_items.pop())
+        # organizing final phrase
         plaintext += word + ' '
 
 print("\nplaintext = {}".format(plaintext))
